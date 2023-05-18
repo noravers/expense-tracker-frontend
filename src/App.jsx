@@ -3,15 +3,16 @@ import bg from './img/bg.png'
 import { MainLayout } from './styles/layouts'
 import Orb from './components/Orb/Orb'
 import Navigation from "./components/Navigation/Navigation"
+import { useState } from "react"
 
 function App() {
-
+  const [active, setActive] = useState(1);
   
   return (
     <AppStyled bg={bg} className="App">
+      <Orb/>
       <MainLayout>
-        <Orb/>
-        <Navigation/>
+        <Navigation active={active} setActive={setActive}/>
 
       </MainLayout>
     </AppStyled>
@@ -19,6 +20,7 @@ function App() {
 }
 
 const AppStyled = styled.div`
+    // border: 2px solid violet;
     height: 100vh;
     background-image: url(${props => props.bg})
   `
