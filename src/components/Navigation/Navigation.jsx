@@ -4,6 +4,7 @@ import { menuItems } from '../../utils/menuItems'
 import { signout } from '../../utils/icons'
 
 
+// eslint-disable-next-line react/prop-types
 function Navigation({active, setActive}) {
     
   return (
@@ -47,7 +48,7 @@ const NavStyled = styled.nav`
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
               2px 0 10px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4.5px);
-    border-radius: 32px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -99,9 +100,9 @@ const NavStyled = styled.nav`
             }
         }
         .active {
-            color: rgba(34, 34, 96, 1);
+            color: rgba(34, 34, 96, 1) !important;
             i {
-                color: rgba(34, 34, 96, 1);
+                color: rgba(34, 34, 96, 1) !important;
             }
             &::before {
                 content: "";
