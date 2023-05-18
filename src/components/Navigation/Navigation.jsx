@@ -38,12 +38,14 @@ function Navigation({active, setActive}) {
 }
 
 const NavStyled = styled.nav`
-    border: 2px solid blue;
+    // border: 2px solid blue;
     padding: 2rem 1.5rem;
     width: 374px;
     height: 100%;
     background: rgba(252, 246, 249, 0.78);
-    border: 3px solid #FFFFFF;
+    // border: 3px solid #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
+              2px 0 10px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4.5px);
     border-radius: 32px;
     display: flex;
