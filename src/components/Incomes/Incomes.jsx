@@ -15,6 +15,7 @@ function Incomes() {
           <div className="form-container"></div>
           <div className="incomes"></div>
         </div>
+        
 
         <Form/>
       </InnerLayout>
