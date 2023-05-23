@@ -18,9 +18,10 @@ function IncomeItem({
       </div>
       <div className="content">
         <h5>{title}</h5>
-        <p>{amount}</p>
-        <p>{category}</p>
-        <span>{description}</span>
+        <div className="inner-content">
+          
+        </div>
+        
       </div>
     </IncomeItemStyled>
   )
