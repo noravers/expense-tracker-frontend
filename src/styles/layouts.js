@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const MainLayout = styled.div`
     padding: 3rem;
     height: 100%;
-    display: flex;
+    // display: flex;
     gap: 2rem;
     // background-color: pink
 `;

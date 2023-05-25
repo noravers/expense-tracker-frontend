@@ -4,6 +4,7 @@ import { useGlobalContext } from "../../hooks/globalContext"
 import Form from "../Form/form"
 import { useEffect } from "react"
 import IncomeItem from "../IncomeItem/IncomeItem"
+import { calender } from "../../utils/icons"
 
 function Incomes() {
 
@@ -11,6 +12,7 @@ function Incomes() {
   
   useEffect(() => {
     getIncomes()
+    console.log(incomes)
   }, [])
 
   return (
@@ -32,6 +34,7 @@ function Incomes() {
                     category={category}
                     amount={amount}
                     date={date}
+                    indicatorColor="var(--color-green)"
                   />
                 )
             })}
@@ -45,7 +48,16 @@ function Incomes() {
 }
 
 const IncomesStyled = styled.div`
-
+  display: flex;
+  overflow: auto;
+  .income-content {
+    display: flex;
+    gap: 2rem;
+    .incomes {
+      flex: 1;
+      border: 2px solid violet
+    }
+  }
 `
 
 export default Incomes
