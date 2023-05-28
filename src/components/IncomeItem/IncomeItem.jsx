@@ -70,6 +70,8 @@ function IncomeItem({
       })
   }
 
+  console.log(type, 'type')
+
   return (
     <IncomeItemStyled indicator={indicatorColor}>
       <div className="icon">
@@ -86,6 +88,7 @@ function IncomeItem({
             <p>
               {comment}
               {description}
+              
             </p>
           </div>
           <div className="btn-con">
