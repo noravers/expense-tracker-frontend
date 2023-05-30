@@ -6,8 +6,9 @@ import { useGlobalContext } from "../../hooks/globalContext"
 import Button from "../Button/Button"
 import { plus } from "../../utils/icons"
 
-function Form() {
-    const { addIncome, getIncomes } = useGlobalContext()
+// eslint-disable-next-line react/prop-types
+function Form({section}) {
+    const { addIncome, getIncomes, addExpense, getExpenses } = useGlobalContext()
     const initialValues = {
         title: '',
         amount: '',
@@ -24,10 +25,18 @@ function Form() {
     }
     const handleSubmit = async e => {
         e.preventDefault();
-        addIncome(input)
-            // eslint-disable-next-line no-unused-vars
-            .then(e => getIncomes()); 
-        setInput(initialValues)
+        if (section === "incomes") {
+            addIncome(input)
+                // eslint-disable-next-line no-unused-vars
+                .then(e => getIncomes()); 
+            setInput(initialValues)
+        }
+        if(section === "expenses"){
+            addExpense(input)
+                // eslint-disable-next-line no-unused-vars
+                .then(e => getExpenses());
+            setInput(initialValues)
+        }
     }
     const { title, amount, description, category, date} = input
 
@@ -38,7 +47,7 @@ function Form() {
                 type="text"
                 value={title}
                 name={'title'}
-                placeholder="Salary Title"
+                placeholder={ section === "expenses" ? "Expense Title" : "Salary Title"}
                 onChange={handleInput}
             />
 
@@ -48,7 +57,7 @@ function Form() {
                 type="text"
                 value={amount}
                 name={'amount'}
-                placeholder="Salary Amount"
+                placeholder={section === "expenses" ? "Expense Amount" : "Salary Amount"}
                 onChange={handleInput}
             />
         </div>
@@ -60,16 +69,6 @@ function Form() {
                 dateFormat="dd/MM/yyyy"
                 onChange={(date) => handleDate(date)}
             />
-        </div>
-        <div className="input-color">
-            <textarea
-                name={'description'} 
-                value={description} 
-                placeholder="Add a description"
-                cols="30"
-                rows="4"
-                onChange={handleInput}
-            ></textarea>
         </div>
         <div className="selects input-control">
             <select value={category} name="category" id="category" onChange={handleInput}>
@@ -84,9 +83,19 @@ function Form() {
                 <option value="other">Other</option>
             </select>
         </div>
+         <div className="input-color">
+            <textarea
+                name={'description'} 
+                value={description} 
+                placeholder="Add a reference"
+                cols="30"
+                rows="4"
+                onChange={handleInput}
+            ></textarea>
+        </div>
         <div className="submit-btn">
             <Button
-                name={'Add Income'}
+                name={section === "incomes" ? 'Add Income' : 'Add Expense'}
                 icon={plus}
                 bPad={'.8rem 1.6rem'}
                 bRad={'30px'}
