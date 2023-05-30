@@ -5,30 +5,42 @@ import Form from "../Form/form"
 import { useEffect } from "react"
 import IncomeItem from "../IncomeItem/IncomeItem"
 import { calender } from "../../utils/icons"
+import { useState } from "react"
 
 function Incomes() {
 
-  const { addIncome, getIncomes, incomes } = useGlobalContext()
+  const { getIncomes, deleteIncome, incomes } = useGlobalContext()
+  const [incomesState, setincomesState] = useState([])
   
-  useEffect(() => {
-    getIncomes()
-    console.log(incomes)
+  useEffect(() => {    
+    getIncomes();      
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    setincomesState(incomes)    
+  }, [incomes])
+
+  const handleDelete = (id) => {
+    deleteIncome(id)
+    setincomesState(incomesState.filter(e => e._id !== id))
+  }
 
   return (
     <IncomesStyled>
       <InnerLayout>
-        <h1>Incomes</h1>
+        <h1>Total Income: </h1>
         <div className="income-content">
           <div className="form-container">
             <Form/>
           </div>
           <div className="incomes">
-            {incomes.map(e => {
+            {incomesState.map(e => {
               const { _id, title, amount, description, category, date, type} = e;
                 return (
                   <IncomeItem 
                     key={_id}
+                    id={_id}
                     title={title}
                     description={description}
                     category={category}
@@ -36,6 +48,7 @@ function Incomes() {
                     date={date}
                     type={type}
                     indicatorColor="var(--color-green)"
+                    deleteItem={handleDelete}
                   />
                 )
             })}

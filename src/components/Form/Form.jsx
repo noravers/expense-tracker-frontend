@@ -7,7 +7,7 @@ import Button from "../Button/Button"
 import { plus } from "../../utils/icons"
 
 function Form() {
-    const { addIncome } = useGlobalContext()
+    const { addIncome, getIncomes } = useGlobalContext()
     const initialValues = {
         title: '',
         amount: '',
@@ -22,13 +22,12 @@ function Form() {
     const handleDate = (date) => {
         setInput({...input, date})
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        addIncome(input).
+        addIncome(input)
             // eslint-disable-next-line no-unused-vars
-            then(data => {
-                setInput(initialValues)
-            })
+            .then(e => getIncomes()); 
+        setInput(initialValues)
     }
     const { title, amount, description, category, date} = input
 

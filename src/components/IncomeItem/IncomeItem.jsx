@@ -14,10 +14,9 @@ function IncomeItem({
   description,
   deleteItem,
   indicatorColor,
-  type
+  type,
+  getIncomes
 }) {
-  console.log(category)
-  console.log(type)
 
   const categoryIcon  = () => {
     switch(category) {
@@ -25,7 +24,7 @@ function IncomeItem({
         return money;
       case 'freelancing':
         return freelance
-      case 'investment':
+      case 'investments':
         return stocks;
       case 'stocks':
         return users;
@@ -63,15 +62,7 @@ function IncomeItem({
     }
   }
 
-  const handleDelete = async (id) => {
-    await axios.delete(`${BASE_URL}/delete-income/${id}`)
-      .then(response => {
-        console.log('Item deleted', response)
-      })
-  }
-
-  console.log(type, 'type')
-
+  
   return (
     <IncomeItemStyled indicator={indicatorColor}>
       <div className="icon">
@@ -88,6 +79,7 @@ function IncomeItem({
             <p>
               {comment}
               {description}
+              {type}
               
             </p>
           </div>
@@ -100,7 +92,7 @@ function IncomeItem({
               color={'#fff'}
               iColor={'#fff'}
               hColor={'var(--color-green)'}
-              onClick={() => handleDelete(id)}
+              onClick={() => deleteItem(id)}
             />
           </div>
         </div>
