@@ -1,11 +1,10 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components'
 import Button from '../Button/Button'
-import axios from 'axios'
 import { dollar, calender, comment, trash, freelance, money, stocks, users, bitcoin, card, yt, piggy, book, food, medical, tv, takeaway, clothing } from '../../utils/icons'
 
-const BASE_URL = "http://localhost:5000/api/v1/"
 
-function IncomeItem({
+function Item({
   id,
   title,
   amount,
@@ -166,4 +165,4 @@ const IncomeItemStyled = styled.div`
   }
 `
 
-export default IncomeItem
+export default Item

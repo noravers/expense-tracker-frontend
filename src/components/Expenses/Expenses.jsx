@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { InnerLayout } from "../../styles/layouts"
 import Form from "../Form/form";
-import IncomeItem from "../IncomeItem/IncomeItem";
+import Item from "../IncomeItem/IncomeItem";
 import { useEffect } from "react";
 import { useGlobalContext } from "../../hooks/globalContext";
 import { useState } from "react";
@@ -11,10 +11,7 @@ function Expenses() {
   const [expenseState, setexpenseState] = useState([])
   
   useEffect(() => {    
-    getExpenses();    
-    setTimeout(() => {
-        console.log(expenses, 'expenses')
-    }, 3000);  
+    getExpenses();     
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -41,7 +38,7 @@ function Expenses() {
             {expenseState.map(e => {
               const { _id, title, amount, description, category, date, type} = e;
                 return (
-                  <IncomeItem 
+                  <Item 
                     key={_id}
                     id={_id}
                     title={title}

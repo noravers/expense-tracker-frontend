@@ -24,6 +24,7 @@ function Form({section}) {
         setInput({...input, date})
     }
     const handleSubmit = async e => {
+        console.log(input, 'input')
         e.preventDefault();
         if (section === "incomes") {
             addIncome(input)

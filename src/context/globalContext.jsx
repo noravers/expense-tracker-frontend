@@ -69,8 +69,7 @@ export const GlobalProvider = ({children}) => {
             totalExpense += e.amount
         })
         return totalExpense
-    }
-    
+    }   
 
 
     return (
