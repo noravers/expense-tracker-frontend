@@ -71,6 +71,13 @@ export const GlobalProvider = ({children}) => {
         return totalExpense
     }   
 
+    const transactionHistory = () => {
+        const history = [...incomes, ...expenses]
+        history.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+    }
+
 
     return (
         <GlobalContext.Provider value={{
