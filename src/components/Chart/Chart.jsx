@@ -27,37 +27,52 @@ ChartJs.register(
 
 function Chart() {
     const { incomes, expenses } = useGlobalContext();
-    const data = {
-        labels: incomes.map(inc => {
-            const { date } = inc
-            const formattedDate = new Date(date).toLocaleDateString();
-            return formattedDate;
-        }),
-        datasets: [
-            {
-                label: 'Income',
-                data: [
-                    ...incomes.map(inc => {
-                        const { amount } = inc
-                        return amount
-                    })
-                ],
-                backgroundColor: 'green',
-                tension: .2
-            },
-            {
-                label: 'Expenses',
-                data: [
-                    ...expenses.map(exp => {
-                        const { amount } = exp
-                        return amount
-                    })
-                ],
-                backgroundColor: 'red',
-                tension: .
-            }
-        ]
+const allDates = [...incomes.map(inc => inc.date), ...expenses.map(exp => exp.date)];
+const uniqueDates = Array.from(new Set(allDates));
+uniqueDates.sort((a, b) => new Date(a) - new Date(b));
+const labels = [];
+
+for (const date of uniqueDates) {    
+  const incomeEntry = incomes.reduce((acc, curr) => curr.date === date ? acc + curr.amount : acc, 0);
+  const expenseEntry = expenses.reduce((acc, curr) => curr.date === date ? acc + curr.amount : acc, 0);  
+
+  if (incomeEntry > 0 && expenseEntry > 0) {
+    labels.push(`${date} (Income: ${incomeEntry}, Expense: ${expenseEntry})`);
+  }
+  else if (incomeEntry > 0) {
+    labels.push(`${date} (Income: ${incomeEntry})`);
+  }
+  else if (expenseEntry > 0) {
+    labels.push(`${date} (Expense: ${expenseEntry})`);
+  }
+}
+
+
+// Use the labels array and populate the data arrays for each dataset accordingly
+const data = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Income',
+      data: labels.map(label => {
+        const incomeMatch = label.match(/Income: (\d+)/);
+        return incomeMatch ? parseInt(incomeMatch[1]) : null;
+      }),
+      backgroundColor: 'green',
+      tension: 0.2
+    },
+    {
+      label: 'Expenses',
+      data: labels.map(label => {
+        const expenseMatch = label.match(/Expense: (\d+)/);
+        return expenseMatch ? parseInt(expenseMatch[1]) : null;
+      }),
+      backgroundColor: 'red',
+      tension: 0.2
     }
+  ]
+};
+
   return (
     <ChartStyled>
         <Line data={data}/>

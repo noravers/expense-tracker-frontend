@@ -90,7 +90,8 @@ export const GlobalProvider = ({children}) => {
                 totalExpense,
                 addExpense,
                 incomes,
-                expenses
+                expenses,
+                transactionHistory
             }}>
             {children}
         </GlobalContext.Provider>

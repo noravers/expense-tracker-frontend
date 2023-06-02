@@ -31,6 +31,9 @@ function Dashboard() {
               </div>
             </div>
           </div>
+          <div className="history-container">
+            
+          </div>
         </div>
       </InnerLayout>
     </DashboardStyled>
