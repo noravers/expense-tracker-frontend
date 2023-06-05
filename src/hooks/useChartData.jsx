@@ -1,27 +1,32 @@
-import { useEffect, useMemo } from "react"
-function useChartData({incomes, expenses}) {
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useMemo } from "react"
+function useChartData(incomes = [], expenses = []) {
 
-    const labels = useMemo((incomes, expenses) => {
+    const labels = useMemo(() => {
+        console.log('icnomes', incomes)
         const allDates = [...incomes.map(e => e.date), ...expenses.map(e => e.date)]
         const uniqueDates = Array.from(new Set(allDates))
         uniqueDates.sort((a,b) => new Date(a)- new Date(b))
-        const labels = []
+        let labels = []
 
         for(const date of uniqueDates){
-            const incomeEntry = incomes.reduce((acc, curr) => curr.date === date ? acc + curr.date : acc, 0);
-            const expensesEntry = expenses.reduce((acc, curr) => curr.date === date , 0)
+            const incomeEntry = incomes.reduce((acc, curr) => curr.date === date ? acc + curr.amount : acc, 0);
+            const expensesEntry = expenses.reduce((acc, curr) => curr.date === date ? acc + curr.amount : acc, 0)
             if(expensesEntry > 0 && incomeEntry > 0){
-                labels.push(`${date} (Income: ${incomeEntry}), Expense: ${expensesEntry}`)
+                labels.push(`${date} (Income: ${incomeEntry}), (Expense: ${expensesEntry})`)
             }
-            if(incomeEntry > 0){
+            else if (incomeEntry > 0){
                 labels.push(`${date} Income: ${incomeEntry}`)
             }
-            if(expensesEntry > 0){
+            else if(expensesEntry > 0){
                 labels.push(`${date} Expense: ${expensesEntry}`)
             }
+            console.log(labels, 'labels')
         }
+        console.log(labels, 'LABELS')
+        // console.log(labels, 'returning labels')
         return labels
-    },[incomes, expenses])
+    },[incomes, expenses]) 
 
     const data = useMemo(() => ({
         labels: labels,
@@ -30,7 +35,8 @@ function useChartData({incomes, expenses}) {
                 label: 'Income',
                 data: labels.map(e => {
                     const match = e.match(/Income: (\d+)/);
-                    return match ? match[1] : null
+                    console.log(match)
+                    return match ? parseInt(match[1]) : null
                     }),
                 backgroundColor: 'red',
                 tension: 0.2
@@ -39,7 +45,7 @@ function useChartData({incomes, expenses}) {
                 label: 'Expenses',
                 data: labels.map(e => {
                     const match = e.match(/Expense: (\d+) /);
-                    return match ? match[1] : null
+                    return match ? parseInt(match[1]) : null
                 }),
                 backgroundColor: 'green',
                 tension: 0.2
@@ -48,10 +54,13 @@ function useChartData({incomes, expenses}) {
         ]
     }), [labels])
 
+    // console.log(labels, data, 'labesl and data')
+
 
     return {
     labels, 
     data
   }
+}
 
 export default useChartData;
