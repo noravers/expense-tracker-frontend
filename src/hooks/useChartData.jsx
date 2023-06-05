@@ -27,13 +27,12 @@ function useChartData(incomes = [], expenses = []) {
     },[incomes, expenses]) 
 
     const data = useMemo(() => ({
-        labels: labels.map(e => e.slice(0,16)),
+        labels: labels.map(e => e.slice(0,10)),
         datasets: [
             {
                 label: 'Income',
                 data: labels.map(e => {
                     const match = e.match(/Income: (\d+)/);
-                    console.log(match)
                     return match ? parseInt(match[1]) : null
                     }),
                 backgroundColor: 'green',

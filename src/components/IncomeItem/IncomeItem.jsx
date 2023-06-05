@@ -59,8 +59,7 @@ function Item({
         return ''
     }
   }
-
-  
+    
   return (
     <IncomeItemStyled indicator={indicatorColor}>
       <div className="icon">
@@ -73,7 +72,7 @@ function Item({
         <div className="inner-content">
           <div className="text">
             <p>{dollar} {amount}</p>
-            <p>{calender} {date}</p>
+            <p>{calender} {date.slice(0,10)}</p>
             <p>
               {comment}
               {description}

@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const MainLayout = styled.div`
-    padding: 3rem;
+    // border: 2px solid blue;
+    padding: 2rem;
     height: 100%;
     display: flex;
     gap: 2rem;

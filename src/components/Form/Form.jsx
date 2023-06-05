@@ -24,7 +24,6 @@ function Form({section}) {
         setInput({...input, date})
     }
     const handleSubmit = async e => {
-        console.log(input, 'input')
         e.preventDefault();
         if (section === "incomes") {
             addIncome(input)
@@ -40,6 +39,7 @@ function Form({section}) {
         }
     }
     const { title, amount, description, category, date} = input
+    console.log(section, 'section')
 
   return (
     <FormStyled onSubmit={handleSubmit}>
@@ -72,17 +72,36 @@ function Form({section}) {
             />
         </div>
         <div className="selects input-control">
-            <select value={category} name="category" id="category" onChange={handleInput}>
-                <option value="" disabled>Select Option</option>
-                <option value="salary">Salary</option>
-                <option value="freelancing">Freelancing</option>
-                <option value="investments">Investments</option>
-                <option value="stocks">Stocks</option>
-                <option value="bitcoin">Bitcoin</option>
-                <option value="bank">Bank Transfer</option>
-                <option value="youtube">Youtube</option>
-                <option value="other">Other</option>
-            </select>
+            {
+                section === 'incomes' && (
+                    <select value={category} name="category" id="category" onChange={handleInput}>
+                        <option value="" disabled>Select Option</option>
+                        <option value="salary">Salary</option>
+                        <option value="freelancing">Freelancing</option>
+                        <option value="investments">Investments</option>
+                        <option value="stocks">Stocks</option>
+                        <option value="bitcoin">Bitcoin</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="youtube">Youtube</option>
+                        <option value="other">Other</option>
+                    </select>
+                )
+            } 
+            {
+                section === 'expenses' && (
+                    <select value={category} name="category" id="category" onChange={handleInput}>
+                        <option value="" disabled>Select Option</option>
+                        <option value="education">Education</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="health">Health</option>
+                        <option value="subscription">Subscription</option>
+                        <option value="takeaways">Takeaways</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="traveling">Traveling</option>
+                        <option value="other">Other</option>
+                    </select>
+                )
+            }
         </div>
          <div className="input-color">
             <textarea

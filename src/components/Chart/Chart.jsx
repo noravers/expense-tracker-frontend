@@ -38,7 +38,12 @@ function Chart() {
 }
 
 const ChartStyled = styled.div`
-    border: 2px solid blue;
+    background: #FCF6F9;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 1px 10px rgba(0,0,0,.3);
+    padding: 1rem;
+    border-radius: 20px;
+    height: 50%;
 `
 
 export default Chart;
