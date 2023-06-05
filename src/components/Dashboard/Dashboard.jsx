@@ -3,10 +3,16 @@ import { InnerLayout } from "../../styles/layouts"
 import Chart from '../Chart/Chart'
 import { dollar } from "../../utils/icons"
 import { useGlobalContext } from "../../hooks/globalContext"
+import { useEffect } from "react"
 
 function Dashboard() {
 
-  const { totalExpense, totalIncome } = useGlobalContext()
+  const { totalExpense, totalIncome, getExpenses, getIncomes } = useGlobalContext()
+  useEffect(() => {    
+    getExpenses();  
+    getIncomes();   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <DashboardStyled>
       <InnerLayout>

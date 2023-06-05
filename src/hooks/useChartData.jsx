@@ -3,33 +3,31 @@ import { useMemo } from "react"
 function useChartData(incomes = [], expenses = []) {
 
     const labels = useMemo(() => {
-        console.log('icnomes', incomes)
-        const allDates = [...incomes.map(e => e.date), ...expenses.map(e => e.date)]
-        const uniqueDates = Array.from(new Set(allDates))
-        uniqueDates.sort((a,b) => new Date(a)- new Date(b))
-        let labels = []
+        
+        const allDates = [...incomes.map(inc => inc.date), ...expenses.map(exp => exp.date)];
+        const uniqueDates = Array.from(new Set(allDates));
+        uniqueDates.sort((a, b) => new Date(a) - new Date(b));
+        const labels = [];
 
-        for(const date of uniqueDates){
+        for (const date of uniqueDates) {    
             const incomeEntry = incomes.reduce((acc, curr) => curr.date === date ? acc + curr.amount : acc, 0);
-            const expensesEntry = expenses.reduce((acc, curr) => curr.date === date ? acc + curr.amount : acc, 0)
-            if(expensesEntry > 0 && incomeEntry > 0){
-                labels.push(`${date} (Income: ${incomeEntry}), (Expense: ${expensesEntry})`)
+            const expenseEntry = expenses.reduce((acc, curr) => curr.date === date ? acc + curr.amount : acc, 0);  
+
+            if (incomeEntry > 0 && expenseEntry > 0) {
+                labels.push(`${date} (Income: ${incomeEntry}, Expense: ${expenseEntry})`);
             }
-            else if (incomeEntry > 0){
-                labels.push(`${date} Income: ${incomeEntry}`)
+            else if (incomeEntry > 0) {
+                labels.push(`${date} (Income: ${incomeEntry})`);
             }
-            else if(expensesEntry > 0){
-                labels.push(`${date} Expense: ${expensesEntry}`)
+            else if (expenseEntry > 0) {
+                labels.push(`${date} (Expense: ${expenseEntry})`);
             }
-            console.log(labels, 'labels')
         }
-        console.log(labels, 'LABELS')
-        // console.log(labels, 'returning labels')
         return labels
     },[incomes, expenses]) 
 
     const data = useMemo(() => ({
-        labels: labels,
+        labels: labels.map(e => e.slice(0,16)),
         datasets: [
             {
                 label: 'Income',
@@ -38,24 +36,21 @@ function useChartData(incomes = [], expenses = []) {
                     console.log(match)
                     return match ? parseInt(match[1]) : null
                     }),
-                backgroundColor: 'red',
+                backgroundColor: 'green',
                 tension: 0.2
             },
             {
                 label: 'Expenses',
                 data: labels.map(e => {
-                    const match = e.match(/Expense: (\d+) /);
+                    const match = e.match(/Expense: (\d+)/);
                     return match ? parseInt(match[1]) : null
                 }),
-                backgroundColor: 'green',
+                backgroundColor: 'red',
                 tension: 0.2
 
             }
         ]
     }), [labels])
-
-    // console.log(labels, data, 'labesl and data')
-
 
     return {
     labels, 

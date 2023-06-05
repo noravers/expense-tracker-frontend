@@ -29,7 +29,6 @@ ChartJs.register(
 function Chart() {
     const { incomes, expenses } = useGlobalContext();
     const { data } = useChartData(incomes, expenses)    
-    // console.log(incomes, expenses)
 
   return (
     <ChartStyled>
