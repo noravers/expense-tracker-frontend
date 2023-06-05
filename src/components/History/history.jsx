@@ -37,8 +37,8 @@ const HistoryStyled = styled.div`
         border-radius: 20px;
         justify-content: space-between;
         p{
-          font-size: 1.2rem;
-          font-weight: 800px
+          font-size: 1rem;
+          font-weight: 600px
         }
     }
 `;

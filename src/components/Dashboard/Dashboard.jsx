@@ -92,9 +92,9 @@ const DashboardStyled = styled.div`
         justify-content: space-between
       }
       .salary-title{
-        font-size: 1.2rem;
+        font-size: 1rem;
         span{
-          font-size: 1.8rem;
+          font-size: 1.2rem;
         }
       }
       .salary-item{

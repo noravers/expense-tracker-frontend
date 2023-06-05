@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react"
+import { createContext, useState } from "react"
 import axios from 'axios'
 
 const BASE_URL = "http://localhost:5000/api/v1/"
@@ -9,6 +9,7 @@ export const GlobalProvider = ({children}) => {
 
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(null)
 
 
