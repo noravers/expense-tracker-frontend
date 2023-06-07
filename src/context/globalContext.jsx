@@ -1,7 +1,7 @@
 import { createContext, useState } from "react"
 import axios from 'axios'
 
-const BASE_URL = "http://localhost:5000/api/v1/"
+const BASE_URL = "https://expense-tracker-backend-production-a4ba.up.railway.app/api/v1/"
 export const GlobalContext = createContext()
 
 // eslint-disable-next-line react/prop-types
