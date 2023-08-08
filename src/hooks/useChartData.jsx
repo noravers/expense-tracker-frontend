@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMemo } from "react"
+import { useMemo, useEffect} from "react"
 function useChartData(incomes = [], expenses = []) {
 
     const labels = useMemo(() => {
